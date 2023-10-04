@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "files": ["public_api.ts"],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "compilationMode": "partial",
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "states"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist/test-out",
+    "esModuleInterop": true,
+    "types": ["jest"]
+  },
+  "include": [
+    "jest.config.ts",
+    "modules/**/*.spec.ts",
+    "modules/**/*.test.ts",
+    "modules/**/*.d.ts"
+  ]
+}

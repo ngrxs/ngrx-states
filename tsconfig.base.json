@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "stripInternal": true,
+    "experimentalDecorators": true,
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "downlevelIteration": true,
+    "outDir": "./dist/states",
+    "paths": {},
+    "rootDir": ".",
+    "sourceMap": true,
+    "inlineSources": true,
+    "lib": ["ES2022", "dom"],
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
+  }
+}

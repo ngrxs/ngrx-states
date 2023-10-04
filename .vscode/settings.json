@@ -1,0 +1,71 @@
+{
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnSave": true,
+    "editor.linkedEditing": true,
+    "files.insertFinalNewline": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "angular.enable-strict-mode-prompt": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    ".angular": true,
+    ".vs": true,
+    "node_modules": true
+  },
+  "html.autoClosingTags": true,
+  "html.format.extraLiners": "",
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapAttributes": "preserve-aligned",
+  "html.format.wrapLineLength": 140,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 100,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.sortConfiguration.customOrderingRules.defaultOrderLevel": 60,
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "orderLevel": 10,
+      "regex": "^[@]"
+    },
+    {
+      "disableSort": true,
+      "orderLevel": 20,
+      "regex": "^$",
+      "type": "importMember"
+    },
+    {
+      "orderLevel": 30,
+      "regex": "^rxjs"
+    },
+    {
+      "disableSort": true,
+      "orderLevel": 40,
+      "regex": "^[.]"
+    }
+  ],
+  "importSorter.sortConfiguration.removeUnusedImports": true,
+  "jest.autoRun": {
+    "onSave": "test-file",
+    "onStartup": ["all-tests"],
+    "watch": false
+  },
+  "material-icon-theme.activeIconPack": "angular_ngrx",
+  "material-icon-theme.folders.theme": "specific",
+  "typescript.format.semicolons": "insert",
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.quoteStyle": "single"
+}

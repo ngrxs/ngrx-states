@@ -1,0 +1,28 @@
+{
+  "name": "@ngrxs/states",
+  "version": "0.0.1",
+  "description": "An NGRX router store with actions and router selectors for easier development",
+  "license": "MIT",
+  "main": "index.js",
+  "peerDependencies": {
+    "@ngrx/store": "16.2.0",
+    "rxjs": "^6.5.3 || ^7.5.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "author": "Rosen Kolev",
+  "keywords": [
+    "angular",
+    "NGRX",
+    "Redux"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngrxs/ngrx-states.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

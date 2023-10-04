@@ -1,0 +1,95 @@
+name: Integration
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+      - 'hotfix/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, release/**]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          pnpm config set store-dir ~/.pnpm
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        env:
+          CACHE_NAME: cache-node-modules
+        with:
+          path: ~/.pnpm
+          key: ${{ runner.os }}-${{ env.CACHE_NAME }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.CACHE_NAME }}-
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile --prefer-offline
+      - name: Spelling
+        run: npx -y cspell **/* --no-progress
+      - name: Unit Tests
+        run: pnpm test:ci
+      - name: Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: reports/cobertura-coverage.xml
+          badge: true
+          format: markdown
+          output: both
+      - name: Write Code Coverage to Job Summary
+        run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+      - name: Linting
+        run: pnpm lint
+      - name: Build
+        run: pnpm build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+      - name: Get NPM Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: dist/states
+      - uses: mukunku/tag-exists-action@v1.4.0
+        id: check-tag
+        with:
+          tag: 'v${{ steps.package-version.outputs.current-version}}'
+    outputs:
+      TAG: 'v${{ steps.package-version.outputs.current-version}}'
+      RELEASE_TAG_FREE: ${{ steps.check-tag.outputs.exists == 'false' }}
+  publish:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && needs.build.outputs.RELEASE_TAG_FREE == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+      - name: Publish
+        run: |
+          cd dist/states/
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          npm publish
+      - name: Create Release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.build.outputs.TAG }}
+          release_name: ${{ needs.build.outputs.TAG }}
+          draft: false
+          prerelease: false

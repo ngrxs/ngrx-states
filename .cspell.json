@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en-US",
+  "overrides": [
+    {
+      "filename": "{*.spec.ts,*.mocks.ts}",
+      "words": [
+        "ngneat"
+      ]
+    },
+    {
+      "filename": "{angular.json,ng-package.json}",
+      "words": [
+        "packagr",
+        "devkit"
+      ]
+    },
+    {
+      "filename": "jest.config.js",
+      "words": [
+        "lcov",
+        "cobertura"
+      ]
+    }
+  ],
+  "ignorePaths": [
+    ".cspell.json",
+    "package.json",
+    "pnpm-lock.yaml",
+    "coverage/",
+    "reports/",
+    "node_modules/**",
+    "dist/"
+  ],
+  "words": [
+    "ngrx",
+	"ngrxs"
+  ]
+}
