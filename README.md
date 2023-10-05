@@ -1,6 +1,6 @@
 # ngrx-states
 
-[![Build](https://github.com/ngrxs/ngrx-state/workflows/Integration/badge.svg)](https://github.com/ngrxs/ngrx-states/actions?query=workflow%3AIntegration)
+[![Build](https://github.com/ngrxs/ngrx-states/workflows/Integration/badge.svg)](https://github.com/ngrxs/ngrx-states/actions?query=workflow%3AIntegration)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ngrxs/ngrx-states?logo=github)](https://github.com/ngrxs/ngrx-states)
 [![npm latest version](https://img.shields.io/npm/v/@ngrxs/states/latest?logo=npm)](https://www.npmjs.com/package/@ngrxs/states)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@ngrxs/states?label=npm%20-%20minzipped&logo=npm)](https://www.npmjs.com/package/@ngrxs/states)
