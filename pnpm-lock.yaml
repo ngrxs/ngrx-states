@@ -62,6 +62,9 @@ devDependencies:
   '@types/jest':
     specifier: 29.5.1
     version: 29.5.1
+  '@types/jest-when':
+    specifier: ^3.5.3
+    version: 3.5.3
   '@types/node':
     specifier: ^18.16.3
     version: 18.18.0
@@ -92,6 +95,9 @@ devDependencies:
   jest-silent-reporter:
     specifier: 0.5.0
     version: 0.5.0
+  jest-when:
+    specifier: ^3.6.0
+    version: 3.6.0(jest@29.7.0)
   ng-packagr:
     specifier: ^16.2.0
     version: 16.2.3(@angular/compiler-cli@16.2.7)(tslib@2.6.2)(typescript@5.1.6)
@@ -3144,6 +3150,12 @@ packages:
     resolution: {integrity: sha512-kv43F9eb3Lhj+lr/Hn6OcLCs/sSM8bt+fIaP11rCYngfV6NVjzWXJ17owQtDQTL9tQ8WSLUrGsSJ6rJz0F1w1A==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.1
+    dev: true
+
+  /@types/jest-when@3.5.3:
+    resolution: {integrity: sha512-gJWLSCRWEkPHYXYjjrxEMfWopoA2bl9nUbwDomxIzRXfe0gLkmSDPD0lLcoAiO2RDpXDoHSeigy/rNa/ja0MfQ==}
+    dependencies:
+      '@types/jest': 29.5.1
     dev: true
 
   /@types/jest@29.5.1:
@@ -6915,6 +6927,14 @@ packages:
       emittery: 0.13.1
       jest-util: 29.7.0
       string-length: 4.0.2
+    dev: true
+
+  /jest-when@3.6.0(jest@29.7.0):
+    resolution: {integrity: sha512-+cZWTy0ekAJo7M9Om0Scdor1jm3wDiYJWmXE8U22UVnkH54YCXAuaqz3P+up/FdtOg8g4wHOxV7Thd7nKhT6Dg==}
+    peerDependencies:
+      jest: '>= 25'
+    dependencies:
+      jest: 29.7.0(@types/node@18.18.0)
     dev: true
 
   /jest-worker@27.5.1:

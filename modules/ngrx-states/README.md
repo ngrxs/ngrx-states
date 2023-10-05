@@ -37,7 +37,7 @@ import { User } from '../models/user';
 export type UsersState = SharedState<User[], number>;
 
 export const initialState: UsersState = adapter.getInitialState<User[], number>([]);
-export const setUser = adapter.createSetter((user: User) => user.id);
+export const setUser = adapter.createArraySetter((user: User) => user.id);
 
 export const usersReducer = createReducer(
   initialState,

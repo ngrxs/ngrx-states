@@ -1,28 +1,17 @@
 import { Action } from '@ngrx/store';
 
 import { Observable, of, OperatorFunction } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  groupBy,
-  map,
-  mergeMap,
-  shareReplay,
-  switchMap
-} from 'rxjs/operators';
+import { catchError, groupBy, map, mergeMap, switchMap } from 'rxjs/operators';
+
+import { cachedMergeMap } from './cache';
 
 function runWithErrorHandling<A, R, E>(
   run: (a: A) => Observable<R>,
-  onError: (error: Error) => Observable<E>,
-  ttl: number | null
+  onError: (error: Error) => Observable<E>
 ) {
   return (action: A): Observable<R | E> => {
     try {
-      const willExpire = typeof ttl === 'number' && ttl !== null && ttl > 0;
-      const runner$ = run(action).pipe(catchError(onError));
-      return willExpire
-        ? runner$.pipe(shareReplay({ bufferSize: 1, refCount: true, windowTime: ttl }))
-        : runner$;
+      return run(action).pipe(catchError(onError));
     } catch (e) {
       return onError(e as Error);
     }
@@ -51,10 +40,17 @@ export function fetch<
     return (source: Observable<TAction>): Observable<TMap | TError> =>
       source.pipe(
         groupBy((action) => id(action)),
-        mergeMap((pairs) => pairs.pipe(switchMap(runWithErrorHandling(onMap, onError, opts.ttl))))
+        mergeMap((pairs) =>
+          pairs.pipe(
+            cachedMergeMap<TAction, Observable<TMap | TError>, TMap | TError>(
+              runWithErrorHandling(onMap, onError),
+              opts.ttl
+            )
+          )
+        )
       );
   }
 
   return (source: Observable<TAction>): Observable<TMap | TError> =>
-    source.pipe(concatMap(runWithErrorHandling(onMap, onError, opts.ttl)));
+    source.pipe(cachedMergeMap(runWithErrorHandling(onMap, onError), opts.ttl));
 }

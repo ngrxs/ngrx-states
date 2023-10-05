@@ -85,6 +85,9 @@ export interface SharedStateAdapter {
     key: TKey,
     fn: SingleTypeMap<T, TKey>
   ): T;
+  createArraySetter<T extends SharedLoadableState<unknown[]>>(
+    idSelector: (entity: T['entities'][0]) => SharedStateId
+  ): (state: T, entity: T['entities'][0]) => T['entities'];
 }
 
 export const adapter: SharedStateAdapter = {
@@ -171,5 +174,13 @@ export const adapter: SharedStateAdapter = {
   ) => ({
     ...state,
     [key]: fn(state[key])
-  })
+  }),
+  createArraySetter:
+    <T extends SharedLoadableState<TData[]>, TData>(idSelector: (entity: TData) => SharedStateId) =>
+    (state: T, entity: TData): TData[] => {
+      const entityId = idSelector(entity);
+      const entities = state.entities.filter((u) => idSelector(u) !== entityId);
+      entities.push(entity);
+      return entities;
+    }
 };
