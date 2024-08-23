@@ -1,11 +1,11 @@
 {
   "name": "@ngrxs/states",
-  "version": "1.1.0",
+  "version": "18.0.0",
   "description": "An NGRX router store with actions and router selectors for easier development",
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "@ngrx/store": "~17.1.0",
+    "@ngrx/store": "^17.2.0 || ^18.0.0",
     "rxjs": "^6.5.3 || ^7.8.0"
   },
   "dependencies": {
